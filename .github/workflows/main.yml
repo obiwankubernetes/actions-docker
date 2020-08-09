@@ -12,12 +12,18 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # First it will Checkout epository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    # Next we will build container from folder
+    # enter docker credentials from github secrets and mount them to env in container
+    - name: docker login
+      env: 
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}  
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD      
+    # Next we will build container from main directory
     - name: docker build python
       run: |
         docker build ./ -t aimvector/python:1.0.0
