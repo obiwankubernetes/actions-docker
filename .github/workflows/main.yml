@@ -27,3 +27,7 @@ jobs:
     - name: docker build python
       run: |
         docker build ./ -t aimvector/python:1.0.0
+    # next we will push image to docker cont registry    
+    - name: docker push
+      run: |
+        docker push aimvector/python:1.0.0
