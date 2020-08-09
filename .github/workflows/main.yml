@@ -17,7 +17,7 @@ jobs:
     steps:
     # First it will Checkout epository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    # Next we will build container from source code folder
+    # Next we will build container from folder
     - name: docker build python
       run: |
-        docker build ./src -t aimvector/python:1.0.0
+        docker build ./ -t aimvector/python:1.0.0
