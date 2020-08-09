@@ -1,0 +1,23 @@
+name: Docker Series Build
+
+# Controls when the action will run. Triggers the workflow on push or pull request events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # First it will Checkout epository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    # Next we will build container from source code folder
+    - name: docker build python
+      run: |
+        docker build ./src -t aimvector/python:1.0.0
